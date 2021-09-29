@@ -1,45 +1,8 @@
-# Python: Getting Started
+# Spekit Coding Challenge
 
-A barebones Django app, which can easily be deployed to Heroku.
+I used the tutorial in the article [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) to create a barebones Django app deployed to Heroku. I forked the tutorial [repo](https://github.com/heroku/python-getting-started) and committed my changes so that it's easier to see where I added functionality vs where I used the template repo from the tutorial.
 
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+TODOs:
+- The most notable TODO here is to actually upload a document somewhere, presumably in some sort of document storage location like S3 or something similar. Since the coding challenge focused on the Python/Django/Postgres/Heroku stack, I decided to punt on that portion for now, but add a column in the Documents DB for a link to the actual document itself (i.e. an S3 link). The idea would be that when a POST request is made to the /document/ endpoint, the attachment is uploaded to S3 and the link is stored in the documents table. When a GET request is issued to the /document/ID/ endpoint, the document is fetched from S3 and downloaded.
 
-## Running Locally
-
-Make sure you have Python 3.9 [installed locally](https://docs.python-guide.org/starting/installation/). To push to Heroku, you'll need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), as well as [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
-
-```sh
-$ git clone https://github.com/heroku/python-getting-started.git
-$ cd python-getting-started
-
-$ python3 -m venv getting-started
-$ pip install -r requirements.txt
-
-$ createdb python_getting_started
-
-$ python manage.py migrate
-$ python manage.py collectstatic
-
-$ heroku local
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```sh
-$ heroku create
-$ git push heroku main
-
-$ heroku run python manage.py migrate
-$ heroku open
-```
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Python on Heroku, see these Dev Center articles:
-
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
+- More unit tests! In the timebox I gave myself, I prioritized learning Django patterns and getting things up and running over adding robust testing. I'd like more test scenarios in test_views.py, as well as another test file test_models.py to test the underlying models.
